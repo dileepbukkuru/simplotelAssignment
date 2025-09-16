@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food Webpage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; */
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      background: #ff7070; /* soft salmon bar */
+      padding: 0.6rem 8%;
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      color: transparent; /* visually hide to center nav while keeping grid space */
+      user-select: none;
+      font-size: 0;
+    }
+
+    .nav-links {
+    display: flex;
+    gap: 4rem;
+    justify-self: center;
+    padding: 8px 6px;
+}
+
+    .nav-links a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 2px;
+      /* font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; */
+    }
+
+    .toggle {
+      display: none;
+      font-size: 2.6rem;
+      font-weight: 700;
+      background: transparent;
+      color: #111;
+      padding: 0.2rem 0.4rem;
+      cursor: pointer;
+      z-index: 101;
+      justify-self: end;
+    }
+
+    @media (max-width: 768px) {
+      .toggle {
+        display: block;
+        margin-left: 600px;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: #f7a7a3;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: left 0.3s ease;
+      }
+      .nav-links a { color: #111; }
+      .nav-links.active {
+        left: 0;
+      }
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      background: none;
+      padding: 0;
+      height: 753px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background: linear-gradient(90deg, #fff3a9 0%, #ffc3cb 100%);
+      padding: 4rem 8%;
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      margin-bottom: 1.5rem;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      font-family: sans-serif;
+    }
+
+    .hero-left p {
+      color: #333;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      max-width: 650px;
+      font-size: clamp(0.95rem, 1.8vw, 1rem);
+      font-family: sans-serif;
+    }
+
+    .hero-left button {
+      background: #ff7070;
+    color: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 100;
+    width: 140px;
+    font-family: sans-serif;
+
+    }
+
+    .hero-right {
+      text-align: center;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { letter-spacing: 1px; font-weight: 600; }
+      .hero-left { padding: 3rem 6%; }
+    }
+
+    @media (max-width: 768px) {
+      .grid-section {
+        flex-direction: column;
+      }
+      .grid-left {
+        grid-template-columns: 1fr;
+      }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { order: -1; }
+      .hero-left { padding: 2.5rem 6%; }
+      .hero-right { height: 40vh; }
+      .nav-links a { font-size: 1.1rem; }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 0.5rem 5%; }
+      .hero-left h1 { letter-spacing: 4px; }
+      .hero-left button { width: 120px; padding: 0.7rem 1.2rem; }
+    }
+
+    /* ===== GRID SECTION ===== */
+    .grid-section {
+      background: linear-gradient(90deg, #ffefba 0%, #ffc3e1 100%);
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      padding: 5rem 8%;
+      align-items: center;
+    }
+
+    .grid-left {
+      display: flex; /* center the collage box */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Boxed 3-image collage: left column 2 images, right column 1 tall */
+    .image-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px; 
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%; /* honor aspect-ratio */
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .image-box .tall { grid-column: 2; grid-row: 1 / span 2; aspect-ratio: 3 / 4; }
+    .image-box .square { aspect-ratio: 1 / 1; }
+    .image-box .stack-top { grid-column: 1; grid-row: 1; }
+    .image-box .stack-bottom { grid-column: 1; grid-row: 2; }
+
+    .grid-right { display: flex; justify-content: center; align-items: center; }
+
+    .info-card {
+      background: #ff7070;
+      color: #111;
+      padding: 2.5rem 3rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .info-card .eyebrow {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(17,17,17,0.8);
+      margin-bottom: 0.6rem;
+    }
+
+    .info-card h3 {
+      font-size: clamp(1.6rem, 5vw, 2.6rem);
+      line-height: 1.1;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      color: #111;
+    }
+
+    .info-card .cta { display: inline-flex; align-items: center; gap: 0.5rem; color: #111; text-decoration: none; font-weight: 600; }
+    .info-card .cta span { transition: transform 0.2s ease; }
+    .info-card .cta:hover span { transform: translateX(3px); }
+
+    /* Responsive behavior for Section 2 */
+    @media (max-width: 1024px) {
+      .grid-section { gap: 2.5rem; padding: 4rem 6%; }
+    }
+    @media (max-width: 768px) {
+      .grid-section { grid-template-columns: 1fr; }
+      .image-box { max-width: 100%; }
+      .info-card { max-width: 640px; }
+    }
+    @media (max-width: 480px) {
+      .grid-left { 
+        padding: 1.8rem 1.6rem; 
+      }
+      .info-card { padding: 1.8rem 1.6rem; }
+      .info-card h3 { letter-spacing: 3px; }
+    }
+
+    /* ===== HERO2 SECTION ===== */
+    :root{
+      --bg1: #fff3b0;
+      --bg2: #ffd0e9;
+      --card: #f36b68;
+      --card-border: rgba(0,0,0,0.12);
+      --text-dark: #0b0b0b;
+      --gap: 40px;
+    }
+
+    *{ box-sizing: border-box; }
+    body,html{
+      height:100%;
+      margin:0;
+      font-family: "Montserrat", sans-serif;
+      color:var(--text-dark);
+    }
+
+    .page {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    }
+
+    .hero2 {
+      width:100%;
+      max-width:1400px;
+      display:flex;
+      gap: var(--gap);
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    /* BIGGER image cluster */
+    .image-cluster {
+      display:grid;
+      grid-template-columns: 260px 460px;
+      grid-template-rows: 260px 260px;
+      gap: 24px;
+    }
+
+    .image-cluster img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      border-radius:6px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .tall {
+      grid-row: 1 / span 2;
+      grid-column: 2 / span 1;
+    }
+
+    .card {
+      background: var(--card);
+      width: 500px;
+      padding: 48px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      border: 1px solid var(--card-border);
+      color: #111;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .card .label {
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      opacity:0.9;
+      margin-bottom: 12px;
+      font-weight:500;
+    }
+
+    .card h1{
+      margin:0;
+      font-size:52px;
+      line-height:1;
+      letter-spacing:3px;
+      font-weight:900;
+      text-transform: uppercase;
+    }
+
+    .card .sub {
+      margin-top:28px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:500;
+      cursor:pointer;
+    }
+
+    .card .sub .arrow {
+      display:inline-block;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+    }
+
+    @media (max-width: 960px){
+      .hero2{ flex-direction:column; gap: 30px; }
+      .image-cluster{ grid-template-columns:1fr; grid-template-rows:auto; }
+      .tall{ grid-row:auto; grid-column:auto; height:300px; }
+      .image-cluster img{ height: 220px; }
+      .card{ width:100%; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <div class="logo">Foodie</div>
+
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Order</a>
+      <a href="#">Food</a>
+      <a href="#">Restaurant</a>
+      <a href="#">Testimonials</a>
+      <a href="#">Contact Us</a>
+    </nav>
+
+    <div class="toggle">&#9776;</div>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Lorem Ipsum</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+        id est vitae dolor rhoncus tristique. Maecenas metus quam,
+        rhoncus euismod lorem in, sollicitudin viverra eros. Donec
+        dictum luctus quam ut tristique. Curabitur nec faucibus purus.
+        Quisque congue sem nec justo mollis, in tincidunt erat pretium.
+      </p>
+      <button>Click Me</button>
+    </div>
+    <div class="hero-right">
+      <img src="./img2.jpeg" alt="Food" />
+    </div>
+  </section>
+
+  <!-- ===== GRID SECTION ===== -->
+  <section class="grid-section">
+    <div class="grid-left"> 
+      <div class="image-box">
+        <img class="square stack-top" src="./img4.jpeg" alt="Gallery 1" />
+        <img class="square stack-bottom" src="./img3.jpeg" alt="Gallery 2" />
+        <img class="tall" src="./img2.jpeg" alt="Gallery 3 Tall" />
+      </div>
+    </div>
+
+    <div class="grid-right">
+      <div class="info-card">
+        <small class="eyebrow">Lorem ipsum</small>
+        <h3>LOREM IPSUM<br/>SET ADEMIR</h3>
+        <a class="cta" href="#">Click <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const toggle = document.querySelector('.toggle');
+    const nav = document.querySelector('.nav-links');
+
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
